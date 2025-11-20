@@ -8,31 +8,28 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class addimage {
+public class InsertTEXT {
 
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Enter image path:");
-        String imagePath = sc.nextLine();  
-
+        System.out.println("Enter TXT file:");
+        String TXTFILE = sc.nextLine();  
+        try {
         String url = "jdbc:mysql://localhost:3306/student";
         String user = "root";
         String pass = "SHRIKANT@2024";
 
-        String sql = "INSERT INTO Addimage (name, image) VALUES (?, ?)";
-
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+                Class.forName("com.mysql.cj.jdbc.Driver");
 
           
                 Connection con = DriverManager.getConnection(url, user, pass);
-                PreparedStatement ps = con.prepareStatement(sql);
-                FileInputStream fis = new FileInputStream(imagePath);
+                PreparedStatement ps = con.prepareStatement("INSERT INTO Addimage (name, image) VALUES (?, ?)");
+                FileInputStream fis = new FileInputStream(TXTFILE);
         
 
-                ps.setString(1, "my image");
+                ps.setString(2, "TEXTs");
                 ps.setBinaryStream(2, fis, fis.available());
 
                 int rows = ps.executeUpdate();
